@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://b565xvn54k0ca"]
+
+[ext_resource type="Texture2D" uid="uid://b2pu3w3fwkeyt" path="res://graphics/player/player.png" id="1_66xm7"]
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_hmrn8"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(193, 95)
+script = ExtResource("1_hmrn8")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
+texture = ExtResource("1_66xm7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-137, -477)
+polygon = PackedVector2Array(151, 383, 141, 389, 138, 394, 136, 407, 133, 411, 132, 420, 126, 427, 126, 441, 123, 444, 112, 454, 107, 466, 90, 477, 75, 492, 78, 518, 80, 535, 85, 543, 92, 560, 96, 565, 100, 569, 103, 569, 105, 570, 107, 571, 115, 576, 124, 577, 134, 577, 141, 576, 151, 571, 153, 568, 157, 569, 161, 569, 166, 566, 168, 563, 170, 561, 171, 560, 180, 555, 188, 553, 193, 548, 197, 536, 196, 524, 194, 513, 188, 499, 178, 474, 181, 459, 189, 456, 193, 435, 191, 423, 183, 419, 173, 409, 173, 401, 173, 396, 169, 386)
+
+[node name="LaserReload" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="GrenadeReload" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="LaserPos" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="LaserPos"]
+position = Vector2(19, -91)
+
+[node name="Marker2D2" type="Marker2D" parent="LaserPos"]
+position = Vector2(11, -88)
+
+[node name="Marker2D3" type="Marker2D" parent="LaserPos"]
+position = Vector2(27, -88)
+
+[connection signal="timeout" from="LaserReload" to="." method="_on_laser_reload_timeout"]
+[connection signal="timeout" from="GrenadeReload" to="." method="_on_grenade_reload_timeout"]

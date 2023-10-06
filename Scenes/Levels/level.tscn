@@ -12,6 +12,8 @@ script = ExtResource("1_4cqoc")
 [node name="Player" parent="." instance=ExtResource("2_vedp1")]
 position = Vector2(410, 520)
 
+[node name="Projectiles" type="Node2D" parent="."]
+
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
 [connection signal="shoot_grenade" from="Player" to="." method="_on_player_shoot_grenade"]
 [connection signal="shoot_laser" from="Player" to="." method="_on_player_shoot_laser"]

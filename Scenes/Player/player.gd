@@ -3,8 +3,8 @@ extends CharacterBody2D
 var speed: int = 600
 var can_laser: bool = true
 var can_grenade: bool = true
-signal shoot_laser
-signal shoot_grenade
+signal shoot_laser(pos)
+signal shoot_grenade(pos)
 
 func _ready():
 	pass 
@@ -38,7 +38,9 @@ func move_character():
 
 func character_actions():
 	if Input.is_action_pressed("primary action") and can_laser:
-		shoot_laser.emit()
+		var laser_markers = $LaserMarkers.get_children()
+		var select_laser_marker = laser_markers[randi() % laser_markers.size()]
+		shoot_laser.emit(select_laser_marker.global_position)
 		can_laser = false
 		$LaserReload.start()
 #		Forma alternativa de criar um timer para o laser
@@ -46,7 +48,9 @@ func character_actions():
 #		can_laser = true		
 		
 	elif Input.is_action_pressed("secondary action") and can_grenade:
-		shoot_grenade.emit()
+		var grenade_markers = $GrenadeMarkers.get_children()
+		var select_grenade_marker = grenade_markers[randi() % grenade_markers.size()]
+		shoot_grenade.emit(select_grenade_marker.global_position)
 		can_grenade = false
 		$GrenadeReload.start()
 #		Forma alternativa de criar um timer para a granada

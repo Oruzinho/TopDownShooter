@@ -23,16 +23,27 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="LaserPos" type="Node2D" parent="."]
+[node name="LaserMarkers" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="LaserPos"]
+[node name="Marker2D" type="Marker2D" parent="LaserMarkers"]
 position = Vector2(19, -91)
 
-[node name="Marker2D2" type="Marker2D" parent="LaserPos"]
+[node name="Marker2D2" type="Marker2D" parent="LaserMarkers"]
 position = Vector2(11, -88)
 
-[node name="Marker2D3" type="Marker2D" parent="LaserPos"]
+[node name="Marker2D3" type="Marker2D" parent="LaserMarkers"]
 position = Vector2(27, -88)
+
+[node name="GrenadeMarkers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="GrenadeMarkers"]
+position = Vector2(19, -93)
+
+[node name="Marker2D2" type="Marker2D" parent="GrenadeMarkers"]
+position = Vector2(9, -91)
+
+[node name="Marker2D3" type="Marker2D" parent="GrenadeMarkers"]
+position = Vector2(29, -91)
 
 [connection signal="timeout" from="LaserReload" to="." method="_on_laser_reload_timeout"]
 [connection signal="timeout" from="GrenadeReload" to="." method="_on_grenade_reload_timeout"]

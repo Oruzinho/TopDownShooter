@@ -20,14 +20,14 @@ func _process(_delta):
 func _on_gate_player_entered_gate(body):
 	print("The player has entered the gate")
 
-func _on_player_shoot_laser():
+func _on_player_shoot_laser(pos):
 	print("shoot laser")
 	var laser = laser_scene.instantiate()
-	laser.position = $Player.position
-	add_child(laser)
+	laser.position = pos
+	$Projectiles.add_child(laser)
 	
-func _on_player_shoot_grenade():
+func _on_player_shoot_grenade(pos):
 	print("shoot granade")
 	var grenade = grenade_scene.instantiate()
-	grenade.position = $Player.position
+	grenade.position = pos
 	add_child(grenade)

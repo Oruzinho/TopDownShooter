@@ -3,8 +3,8 @@ extends CharacterBody2D
 var speed: int = 600
 var can_laser: bool = true
 var can_grenade: bool = true
-signal shoot_laser(pos)
-signal shoot_grenade(pos)
+signal shoot_laser(pos,dir)
+signal shoot_grenade(pos,dir)
 
 func _ready():
 	pass 
@@ -18,6 +18,8 @@ func move_character():
 	var direction = Input.get_vector("left", "right", "top", "down")
 	velocity = direction * speed
 	move_and_slide()
+	
+	look_at(get_global_mouse_position())
 	
 	#	As ações comentadas abaixo são as mesmas que as que estão acima, porém o código acima funciona de uma forma simplificada, utilizando
 #	a função get_vector, que já foi construída com o intuito de tornar mais fácil programar a movimentação do jogador em jogs top-down.
@@ -34,13 +36,12 @@ func move_character():
 #	if Input.is_action_pressed("down"):
 #		position.y += speed * delta
 	
-
-
 func character_actions():
 	if Input.is_action_pressed("primary action") and can_laser:
 		var laser_markers = $LaserMarkers.get_children()
-		var select_laser_marker = laser_markers[randi() % laser_markers.size()]
-		shoot_laser.emit(select_laser_marker.global_position)
+		var pos = laser_markers[randi() % laser_markers.size()].global_position
+		var dir = (get_global_mouse_position() - position).normalized()
+		shoot_laser.emit(pos,dir)
 		can_laser = false
 		$LaserReload.start()
 #		Forma alternativa de criar um timer para o laser
@@ -48,9 +49,9 @@ func character_actions():
 #		can_laser = true		
 		
 	elif Input.is_action_pressed("secondary action") and can_grenade:
-		var grenade_markers = $GrenadeMarkers.get_children()
-		var select_grenade_marker = grenade_markers[randi() % grenade_markers.size()]
-		shoot_grenade.emit(select_grenade_marker.global_position)
+		var pos = $LaserMarkers.get_children()[0].global_position
+		var dir = (get_global_mouse_position() - position).normalized()
+		shoot_grenade.emit(pos, dir)
 		can_grenade = false
 		$GrenadeReload.start()
 #		Forma alternativa de criar um timer para a granada
@@ -62,7 +63,6 @@ func character_actions():
 		
 func _process(_delta):
 	move_character()
-	
 	character_actions()
 	
 func _on_laser_reload_timeout():

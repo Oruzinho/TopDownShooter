@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://ynrq2yko6uq"]
+
+[ext_resource type="Script" path="res://Scenes/levels/level.gd" id="1_4cqoc"]
+[ext_resource type="PackedScene" uid="uid://cso40a4fns1l0" path="res://Scenes/Objects/gate.tscn" id="2_okxak"]
+[ext_resource type="PackedScene" uid="uid://b565xvn54k0ca" path="res://Scenes/Player/Player.tscn" id="2_vedp1"]
+[ext_resource type="PackedScene" uid="uid://cm00wxfqsfbik" path="res://Scenes/Projectiles/laser.tscn" id="4_v6g6f"]
+[ext_resource type="PackedScene" uid="uid://ca4sp4ihccr25" path="res://graphics/projectiles/grenade.tscn" id="5_dno6w"]
+[ext_resource type="Script" path="res://graphics/projectiles/grenade.gd" id="6_2j6gi"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_4cqoc")
+
+[node name="Gate" parent="." instance=ExtResource("2_okxak")]
+
+[node name="Player" parent="." instance=ExtResource("2_vedp1")]
+position = Vector2(410, 520)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Laser" parent="Projectiles" instance=ExtResource("4_v6g6f")]
+visible = false
+position = Vector2(94, 518)
+
+[node name="Grenade" parent="Projectiles" instance=ExtResource("5_dno6w")]
+script = ExtResource("6_2j6gi")
+
+[connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[connection signal="shoot_grenade" from="Player" to="." method="_on_player_shoot_grenade"]
+[connection signal="shoot_laser" from="Player" to="." method="_on_player_shoot_laser"]

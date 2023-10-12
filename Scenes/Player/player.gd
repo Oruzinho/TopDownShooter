@@ -37,10 +37,10 @@ func move_character():
 #		position.y += speed * delta
 	
 func character_actions():
+	var dir = (get_global_mouse_position() - position).normalized()
 	if Input.is_action_pressed("primary action") and can_laser:
-		var laser_markers = $LaserMarkers.get_children()
+		var laser_markers = $GunMarkers.get_children()
 		var pos = laser_markers[randi() % laser_markers.size()].global_position
-		var dir = (get_global_mouse_position() - position).normalized()
 		shoot_laser.emit(pos,dir)
 		can_laser = false
 		$LaserReload.start()
@@ -49,9 +49,8 @@ func character_actions():
 #		can_laser = true		
 		
 	elif Input.is_action_pressed("secondary action") and can_grenade:
-		var pos = $LaserMarkers.get_children()[0].global_position
-		var dir = (get_global_mouse_position() - position).normalized()
-		shoot_grenade.emit(pos, dir)
+		var pos = $GunMarkers.get_children()[0].global_position
+		shoot_grenade.emit(pos,dir)
 		can_grenade = false
 		$GrenadeReload.start()
 #		Forma alternativa de criar um timer para a granada

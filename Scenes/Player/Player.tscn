@@ -4,29 +4,31 @@
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_hmrn8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4tp6y"]
-radius = 60.0083
+radius = 64.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(-3, -3)
 script = ExtResource("1_hmrn8")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 3)
-rotation = 1.309
+position = Vector2(38, 2)
+rotation = 1.5708
 texture = ExtResource("1_66xm7")
 
-[node name="LaserMarkers" type="Node2D" parent="."]
-position = Vector2(4, 1)
-rotation = 1.59282
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 2)
+shape = SubResource("CircleShape2D_4tp6y")
 
-[node name="Marker2D" type="Marker2D" parent="LaserMarkers"]
-position = Vector2(19, -91)
+[node name="GunMarkers" type="Node2D" parent="."]
 
-[node name="Marker2D2" type="Marker2D" parent="LaserMarkers"]
-position = Vector2(11, -88)
+[node name="Marker2D" type="Marker2D" parent="GunMarkers"]
+position = Vector2(133, 20)
 
-[node name="Marker2D3" type="Marker2D" parent="LaserMarkers"]
-position = Vector2(27, -88)
+[node name="Marker2D2" type="Marker2D" parent="GunMarkers"]
+position = Vector2(131, 25)
+
+[node name="Marker2D3" type="Marker2D" parent="GunMarkers"]
+position = Vector2(131, 16)
 
 [node name="LaserReload" type="Timer" parent="."]
 wait_time = 0.5
@@ -35,10 +37,6 @@ one_shot = true
 [node name="GrenadeReload" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-39, 11)
-shape = SubResource("CircleShape2D_4tp6y")
 
 [connection signal="timeout" from="LaserReload" to="." method="_on_laser_reload_timeout"]
 [connection signal="timeout" from="GrenadeReload" to="." method="_on_grenade_reload_timeout"]

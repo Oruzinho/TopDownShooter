@@ -5,13 +5,18 @@
 [ext_resource type="Texture2D" uid="uid://baicopq4hs73e" path="res://graphics/objects/pillow_small.png" id="3_br53j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1p2nn"]
-size = Vector2(636, 370)
+size = Vector2(729, 417)
 
 [node name="Bed" type="StaticBody2D"]
 position = Vector2(-2, 0)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(659.5, 356.5)
+shape = SubResource("RectangleShape2D_1p2nn")
+
 [node name="Bed Sprite" type="Sprite2D" parent="."]
-position = Vector2(609, 330)
+position = Vector2(658.5, 358)
+scale = Vector2(1.15517, 1.15135)
 texture = ExtResource("1_q447y")
 
 [node name="Pillow Sprite" type="Sprite2D" parent="Bed Sprite"]
@@ -23,7 +28,3 @@ texture = ExtResource("2_rmg4a")
 [node name="PillowSmall" type="Sprite2D" parent="Bed Sprite/Pillow Sprite"]
 position = Vector2(-241, -3)
 texture = ExtResource("3_br53j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(609, 328)
-shape = SubResource("RectangleShape2D_1p2nn")

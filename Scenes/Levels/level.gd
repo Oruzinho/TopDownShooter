@@ -5,7 +5,7 @@ var grenade_scene = preload("res://Scenes/Projectiles/grenade.tscn")
 func _process(_delta):
 	pass
 
-func _on_gate_player_entered_gate(body):
+func _on_gate_player_entered_gate(_body):
 	print("The player has entered the gate")
 
 func _on_player_shoot_laser(pos,dir):

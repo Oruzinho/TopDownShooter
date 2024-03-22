@@ -41,6 +41,7 @@ func character_actions():
 	if Input.is_action_pressed("primary action") and can_laser:
 		var laser_markers = $GunMarkers.get_children()
 		var pos = laser_markers[randi() % laser_markers.size()].global_position
+		$GunParticles1.emitting()
 		shoot_laser.emit(pos,dir)
 		can_laser = false
 		$LaserReload.start()
